@@ -9,3 +9,4 @@ class Blog extends Model
 {
     use HasFactory;
 }
+
