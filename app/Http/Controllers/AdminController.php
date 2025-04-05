@@ -45,5 +45,15 @@ class AdminController extends Controller
         return view('form');
     }
 
+    function insert(Request $request){ // รับค่าจากฟอร์ม
+        $request->validate([ 
+            'title' => 'required | max:50', // ต้องมีข้อมูล และ ตัวอักษรไม่เกิน 50
+            'content' => 'required'
+        ],[
+            'title.required'=>'กรุณาป้อนชื่อบทความของคุณ', //แก้ชื่อที่มันมีให้
+            'title.max'=>'ชื่อบทความไม่ควรเกิน 50 ตัวอักษร',
+            'content.required'=>'กรุณาป้อนเนื้อหาบทความของคุณ'
+        ]);
+    }
     
 }

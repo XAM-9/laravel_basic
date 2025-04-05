@@ -14,11 +14,20 @@
         <div class="mb-3">
             <label for="title" class="form-label">ชื่อบทความ</label>
             <input type="text" class="form-control" name="title" placeholder="ชื่อบทความ">
+            @error('title')
+                <p class="text-danger">{{ $message }}</p>
+            @enderror
         </div>
+
         <div class="mb-3">
             <label for="content" class="form-label">เนื้อหา</label>
             <textarea class="form-control" name="content" rows="3" placeholder="ชื่อบทความ"></textarea>
+            @error('content')
+                <p class="text-danger">{{ $message }}</p>
+            @enderror
         </div>
+
+
         <button type="submit" class="btn btn-primary">บันทึก</button>
         <a href="/blog" class="btn btn-warning">ย้อนกลับ</a>
 
