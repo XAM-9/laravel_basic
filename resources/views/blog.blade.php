@@ -13,11 +13,11 @@
         <table class="table table-hover">
             <thead>
                 <tr>
-                    <th scope="col">#</th>
                     <th scope="col">ชื่อบทความ</th>
                     <th scope="col">เนื้อหา</th>
-                    <th scope="col">ผู้เขียน</th>
                     <th scope="col">สถานะ</th>
+                    <th scope="col">แก้ไข</th>
+                    <th scope="col">ลบ</th>
                     </th>
                 </tr>
             </thead>
@@ -25,16 +25,19 @@
             <tbody>
                 @foreach ($blogs as $items)
                     <tr>
-                        <th scope="row">1</th>
-                        <td>{{ $items['title'] }}</td>
-                        <td>{{ $items['content'] }}</td>
-                        <td>{{ $items['author'] }}</td>
+                        <td>{{ $items->title }}</td>
+                        <td>{{ Str::limit($items->content, 30) }}</td>
                         <td>
-                            @if ($items['status'])
-                                <a href="#" class="btn btn-success">เผยแพร่</a>
+                            @if ($items->status)
+                                <a href="{{ route('changeStatus', $items->id) }}" class="btn btn-success">เผยแพร่</a>
                             @else
-                                <a href="#" class="btn btn-warning">ฉบับร่าง</a>
+                                <a href="{{ route('changeStatus', $items->id) }}" class="btn btn-secondary">ฉบับร่าง</a>
                             @endif
+                        </td>
+                        <td><a href="{{route('edit', $items->id) }}" class="btn btn-warning">แก้ไข</a>
+                        </td>
+                        <td><a href="{{ route('delete', $items->id) }}" class="btn btn-danger"
+                                onclick="return confirm('ยืนยันการลบบทความ {{ $items->title }} หรือไม่ ?')">ลบ</a>
                         </td>
                     </tr>
                 @endforeach

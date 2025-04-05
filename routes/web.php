@@ -22,7 +22,14 @@ Route::get('/blog',[AdminController::class,'blog']);
 Route::get('/about',[AdminController::class,'about']);
 Route::get('/create',[AdminController::class,'create']);
 
+Route::get('delete/{id}',[AdminController::class,'delete'])->name('delete');
+Route::get('changeStatus/{id}',[AdminController::class,'changeStatus'])->name('changeStatus');
+Route::get('edit/{id}',[AdminController::class,'edit'])->name('edit');
+
+
 Route::post('/insert',[AdminController::class,'insert']);
+Route::post('update/{id}',[AdminController::class,'update'])->name('update');
+
 
 
 
