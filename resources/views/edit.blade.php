@@ -29,7 +29,7 @@
 
         <button type="submit" class="btn btn-primary"
             onclick="return confirm('ยืนยันการเพิ่มอัพเดทหรือไม่ ?')">อัพเดท</button>
-        <a href="/blog" class="btn btn-warning">ย้อนกลับ</a>
+        <a href="/author/blog" class="btn btn-warning">ย้อนกลับ</a>
 
     </form>
 

@@ -1,15 +1,11 @@
 @section('title', 'เขียนบทความ')
 
-{{-- //เพื่อบอกว่าใช้ layout/menubar.blade.php เป็นแม่แบบ --}}
 @extends('layouts.app')
 
-{{-- //และให้แสดงเนื้อหาที่อยู่ใน section content --}}
 @section('content')
-
     <h3>เขียนบทความ</h3>
 
-    <form method="POST" action="/insert">
-
+    <form method="POST" action="/author/insert">
         @csrf
         <div class="mb-3">
             <label for="title" class="form-label">ชื่อบทความ</label>
@@ -21,17 +17,30 @@
 
         <div class="mb-3">
             <label for="content" class="form-label">เนื้อหา</label>
-            <textarea class="form-control" name="content" rows="3" placeholder="เนื้อหาบทความ"></textarea>
+            <textarea class="form-control" name="content" rows="3" placeholder="เนื้อหาบทความ" id="editor"></textarea>
             @error('content')
                 <p class="text-danger">{{ $message }}</p>
             @enderror
         </div>
 
-
         <button type="submit" class="btn btn-primary"
             onclick="return confirm('ยืนยันการเพิ่มบทความหรือไม่ ?')">บันทึก</button>
-        <a href="/blog" class="btn btn-warning">ย้อนกลับ</a>
-
+        <a href="/author/blog" class="btn btn-warning">ย้อนกลับ</a>
     </form>
 
+    <!-- เพิ่ม CDN ของ CKEditor -->
+    <script src="https://cdn.ckeditor.com/ckeditor5/44.3.0/classic/ckeditor.js"></script>
+    <script>
+        ClassicEditor
+            .create(document.querySelector('#editor'), {
+                toolbar: ['heading', '|', 'bold', 'italic', 'link', 'bulletedList', 'numberedList', '|', 'undo', 'redo'],
+                height: 300
+            })
+            .then(editor => {
+                console.log('Editor เริ่มทำงานแล้ว!', editor);
+            })
+            .catch(error => {
+                console.error('เกิดข้อผิดพลาด:', error);
+            });
+    </script>
 @endsection

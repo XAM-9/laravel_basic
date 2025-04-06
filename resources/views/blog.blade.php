@@ -23,7 +23,7 @@
                 @foreach ($blogs as $items)
                     <tr>
                         <td>{{ $items->title }}</td>
-                        <td>{{ Str::limit($items->content, 30) }}</td>
+                        <td>{{ Str::limit($items->content, 50) }}</td>
                         <td>
                             @if ($items->status)
                                 <a href="{{ route('changeStatus', $items->id) }}" class="btn btn-success">เผยแพร่</a>

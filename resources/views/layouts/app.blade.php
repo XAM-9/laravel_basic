@@ -8,11 +8,12 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>@yield('title')</title>
+    <title>@yield('title') | Blog Appication</title>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
+    <script src="https://cdn.ckeditor.com/ckeditor5/44.3.0/classic/ckeditor.js"></script>
 
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
@@ -61,9 +62,9 @@
 
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="/">หน้าแรก</a>
-                                    <a class="dropdown-item" href="/blog">บทความทั้งหมด</a>
-                                    <a class="dropdown-item" href="/create">เขียนบทความ</a>
-                                    <a class="dropdown-item" href="/about">เกี่ยวกับฉัน</a>
+                                    <a class="dropdown-item" href="/author/blog">บทความทั้งหมด</a>
+                                    <a class="dropdown-item" href="/author/create">เขียนบทความ</a>
+                                    <a class="dropdown-item" href="/author/about">เกี่ยวกับฉัน</a>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                         onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">

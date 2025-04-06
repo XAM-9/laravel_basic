@@ -3,14 +3,21 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-
+use Illuminate\Support\Facades\DB; // เรียกใช้ DB 
+use App\Models\Blog; //เรียกใช้ Model Blog 
 class AdminController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     function blog()
     {
         // $blogs = DB::table('blogs')->get(); //ดึงข้อมูล
-        $blogs = DB::table('blogs')->paginate(5); //ดึงข้อมูล แบ่งหน้า 
+        // $blogs = DB::table('blogs')->paginate(5); //ดึงข้อมูล แบ่งหน้า 
+
+        $blogs = Blog::paginate(4);
         return view('blog', compact('blogs')); //ส่งข้อมูล ไปยัง view blog 
     }
 
@@ -43,32 +50,38 @@ class AdminController extends Controller
             'content' => $request->content
         ];
 
-        DB::table('blogs')->insert($data); // เพิ่มข้อมูล บันทึก ลงฐานข้อมูล ตาราง blogs ใน database 
-        return redirect('/blog');
+        // DB::table('blogs')->insert($data); // เพิ่มข้อมูล บันทึก ลงฐานข้อมูล ตาราง blogs ใน database 
+
+        Blog::insert($data); // เพิ่มข้อมูล บันทึก ลงฐานข้อมูล ตาราง blogs ใน database โดยใช้ Model Blog
+        return redirect('/author/blog');
     }
 
     function delete($id) // รับค่าจาก url ที่ส่งมา id
     {
         // dd($id); // แสดงข้อมูล debug
-        DB::table('blogs')->where('id', $id)->delete(); 
+        // DB::table('blogs')->where('id', $id)->delete();
 
-        return redirect('/blog');
+        Blog::find($id)->delete(); // ลบข้อมูลตาม id ที่ส่งมา จากฐานข้อมูล โดยใช้ Model Blog
+        return redirect()->back();
     }
 
-    function changeStatus($id){ //
+    function changeStatus($id)
+    { //
         $blogs = DB::table('blogs')->where('id', $id)->first(); // ดึงข้อมูล แก้ไข บทความ ตาม id ที่ส่งมา เพื่อแสดงข้อมูลในฟอร์ม แก้ไข 
         $data = [
             'status' => !$blogs->status
         ];
 
-        DB::table('blogs')->where('id', $id)->update($data); 
+        // DB::table('blogs')->where('id', $id)->update($data);
 
-        return redirect('/blog');
-
+        $blogs = Blog::find($id)->update($data); // แก้ไขข้อมูลตาม id ที่ส่งมา จากฐานข้อมูล โดยใช้ Model Blog
+        return redirect()->back();
     }
 
-    function edit($id){ //
-        $blogs = DB::table('blogs')->where('id', $id)->first(); // ดึงข้อมูล แก้ไข บทความ ตาม id ที่ส่งมา เพื่อแสดงข้อมูลในฟอร์ม แก้ไข 
+    function edit($id)
+    { //
+        // $blogs = DB::table('blogs')->where('id', $id)->first(); // ดึงข้อมูล แก้ไข บทความ ตาม id ที่ส่งมา เพื่อแสดงข้อมูลในฟอร์ม แก้ไข 
+        $blogs = blog::find($id); 
         return view('edit', compact('blogs'));
     }
 
@@ -88,9 +101,9 @@ class AdminController extends Controller
             'content' => $request->content
         ];
 
-        DB::table('blogs')->where('id', $id)->update($data);
-        return redirect('/blog')->with('success', 'อัปเดตบทความเรียบร้อยแล้ว');
+        // DB::table('blogs')->where('id', $id)->update($data);
+
+        blog::find($id)->update($data);
+        return redirect('/author/blog')->with('success', 'อัปเดตบทความเรียบร้อยแล้ว');
     }
-
 }
-
