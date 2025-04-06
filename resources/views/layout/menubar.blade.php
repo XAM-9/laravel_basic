@@ -14,7 +14,7 @@
 <body>
 
     <div class="container py-5 ">
-        <ul class="nav pb-4 align-items-center justify-content-center hover-nav">
+        {{-- <ul class="nav pb-4 align-items-center justify-content-center hover-nav">
             <li class="nav-item">
                 <a class="nav-link" href="/">หน้าแรก</a>
             </li>
@@ -27,7 +27,7 @@
             <li class="nav-item">
                 <a class="nav-link" href="/about">เกี่ยวกับฉัน</a>
             </li>
-        </ul>
+        </ul> --}}
 
         @yield('content')
         @yield('about')

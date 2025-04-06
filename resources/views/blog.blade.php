@@ -1,14 +1,11 @@
 @section('title', 'กล่องข้อความ')
 
-{{-- //เพื่อบอกว่าใช้ layout/menubar.blade.php เป็นแม่แบบ --}}
-@extends('layout/menubar')
+@extends('layouts.app')
 
 {{-- //และให้แสดงเนื้อหาที่อยู่ใน section content --}}
 @section('content')
 
-    <h3>กล่องข้อความ</h3>
-    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ipsum cumque accusantium fugit dolor illum? Velit id natus
-        repellat consectetur, autem molestias, cumque eos est tempore unde dolorem porro soluta laboriosam!</p>
+    @if (count($blogs) > 0)
     <div class="row">
         <table class="table table-hover">
             <thead>
@@ -43,6 +40,12 @@
                 @endforeach
             </tbody>
         </table>
+
+        {{ $blogs->links() }}
+        
     </div>
+    @else
+        <h2 class="text-center">ไม่มีบทความ</h2>
+    @endif
 
 @endsection

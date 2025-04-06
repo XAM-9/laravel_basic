@@ -1,7 +1,7 @@
 @section('title', 'หน้าแรกของเว็บไซต์')
 
 {{-- //เพื่อบอกว่าใช้ layout/menubar.blade.php เป็นแม่แบบ --}}
-@extends('layout/menubar') 
+@extends('layouts.app') 
 
 {{-- //และให้แสดงเนื้อหาที่อยู่ใน section content --}}
 @section('content')

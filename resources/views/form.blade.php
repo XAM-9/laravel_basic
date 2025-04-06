@@ -1,7 +1,7 @@
 @section('title', 'เขียนบทความ')
 
 {{-- //เพื่อบอกว่าใช้ layout/menubar.blade.php เป็นแม่แบบ --}}
-@extends('layout/menubar')
+@extends('layouts.app')
 
 {{-- //และให้แสดงเนื้อหาที่อยู่ใน section content --}}
 @section('content')
@@ -28,7 +28,8 @@
         </div>
 
 
-        <button type="submit" class="btn btn-primary" onclick="return confirm('ยืนยันการเพิ่มบทความหรือไม่ ?')">บันทึก</button>
+        <button type="submit" class="btn btn-primary"
+            onclick="return confirm('ยืนยันการเพิ่มบทความหรือไม่ ?')">บันทึก</button>
         <a href="/blog" class="btn btn-warning">ย้อนกลับ</a>
 
     </form>

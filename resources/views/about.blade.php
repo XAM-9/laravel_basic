@@ -1,5 +1,5 @@
 @section('title', 'เกี่ยวกับฉัน')
-@extends('layout/menubar')
+@extends('layouts.app')
 
 @section('content')
 

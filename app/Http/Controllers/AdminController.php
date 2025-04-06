@@ -9,7 +9,8 @@ class AdminController extends Controller
 {
     function blog()
     {
-        $blogs = DB::table('blogs')->get(); //ดึงข้อมูล
+        // $blogs = DB::table('blogs')->get(); //ดึงข้อมูล
+        $blogs = DB::table('blogs')->paginate(5); //ดึงข้อมูล แบ่งหน้า 
         return view('blog', compact('blogs')); //ส่งข้อมูล ไปยัง view blog 
     }
 
